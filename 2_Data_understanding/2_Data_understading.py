@@ -42,14 +42,14 @@ train.set_index('Id')
 train['MSSubClass'].hist()
 
 
-# In[22]:
+# In[28]:
 
-train['MSZoning'].plot()
-
-
-# In[ ]:
+train['MSZoning'].value_counts().plot(kind='bar')
 
 
+# In[29]:
+
+train['LotFrontage'].hist()
 
 
 # ## 2.4 Verify Data Quality
