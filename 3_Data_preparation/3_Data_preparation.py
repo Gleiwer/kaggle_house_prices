@@ -82,9 +82,14 @@ train['PoolQC'].fillna('XX',inplace=True)
 train['Fence'].fillna('XX',inplace=True)
 
 
-# In[85]:
+# In[90]:
 
 train.to_csv('../data/train_cleaned.csv')
+
+
+# In[91]:
+
+
 
 
 # 

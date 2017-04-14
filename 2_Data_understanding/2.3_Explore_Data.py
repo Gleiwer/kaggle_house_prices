@@ -5,7 +5,7 @@
 # ### Outputs:
 # - Data Exploration Report
 
-# In[632]:
+# In[954]:
 
 import nltk
 import pandas as pd
@@ -20,13 +20,13 @@ import numpy as np
 from numbers import Number
 
 
-# In[633]:
+# In[1036]:
 
 train= pd.read_csv("../data/train.csv")
 train.set_index('Id')
 
 
-# In[634]:
+# In[956]:
 
 def hist_boxplot(column,figsize=(13,8)):
     fig = plt.figure(figsize=figsize) 
@@ -51,399 +51,399 @@ def value_counts_and_info(column,figsize=(13,4)):
     print ('Null Values:',column.isnull().sum())
 
 
-# In[635]:
+# In[957]:
 
 hist_and_info(train['MSSubClass'])
 
 
-# In[636]:
+# In[958]:
 
 value_counts_and_info(train['MSZoning'])
 
 
-# In[637]:
+# In[959]:
 
 #train['LotFrontage'].hist()
 hist_boxplot(train['LotFrontage'])
 
 
-# In[638]:
+# In[960]:
 
 hist_boxplot(train['LotArea'])
 
 
-# In[639]:
+# In[961]:
 
 value_counts_and_info(train['Street'])
 
 
-# In[640]:
+# In[962]:
 
 ## Se identificaron los valores NaN indica que no hay camino de entrada.
 value_counts_and_info(train['Alley'])
 
 
-# In[641]:
+# In[963]:
 
 value_counts_and_info(train['LotShape'])
 
 
-# In[642]:
+# In[964]:
 
 value_counts_and_info(train['LandContour'])
 
 
-# In[643]:
+# In[965]:
 
-value_counts_and_info(train['Utilities'])
+#value_counts_and_info(train['Utilities'])
 
 
-# In[644]:
+# In[966]:
 
 value_counts_and_info(train['LotConfig'])
 
 
-# In[645]:
+# In[967]:
 
 value_counts_and_info(train['LandSlope'])
 
 
-# In[646]:
+# In[968]:
 
 value_counts_and_info(train['Neighborhood'])
 
 
-# In[647]:
+# In[969]:
 
 value_counts_and_info(train['Condition1'])
 
 
-# In[648]:
+# In[970]:
 
 value_counts_and_info(train['Condition2'])
 
 
-# In[649]:
+# In[971]:
 
 value_counts_and_info(train['BldgType'])
 
 
-# In[650]:
+# In[972]:
 
 value_counts_and_info(train['HouseStyle'])
 
 
-# In[651]:
+# In[973]:
 
 value_counts_and_info(train['OverallQual'])
 
 
-# In[652]:
+# In[974]:
 
 value_counts_and_info(train['OverallCond'])
 
 
-# In[653]:
+# In[975]:
 
 hist_and_info(train['YearBuilt'])
 
 
-# In[654]:
+# In[976]:
 
 hist_and_info(train['YearRemodAdd'])
 
 
-# In[655]:
+# In[977]:
 
 value_counts_and_info(train['RoofStyle'])
 
 
-# In[656]:
+# In[978]:
 
 value_counts_and_info(train['RoofMatl'])
 
 
-# In[657]:
+# In[979]:
 
 value_counts_and_info(train['Exterior1st'])
 
 
-# In[658]:
+# In[980]:
 
 value_counts_and_info(train['Exterior2nd'])
 
 
-# In[659]:
+# In[981]:
 
 value_counts_and_info(train['MasVnrType'])
 
 
-# In[660]:
+# In[982]:
 
 hist_boxplot(train['MasVnrArea'])
 
 
-# In[661]:
+# In[983]:
 
 value_counts_and_info(train['ExterQual'])
 
 
-# In[662]:
+# In[984]:
 
 value_counts_and_info(train['ExterCond'])
 
 
-# In[663]:
+# In[985]:
 
 value_counts_and_info(train['Foundation'])
 
 
-# In[664]:
+# In[986]:
 
 value_counts_and_info(train['BsmtQual'])
 
 
-# In[665]:
+# In[987]:
 
 value_counts_and_info(train['BsmtCond'])
 
 
-# In[666]:
+# In[988]:
 
 value_counts_and_info(train['BsmtExposure'])
 
 
-# In[667]:
+# In[989]:
 
 value_counts_and_info(train['BsmtFinType1'])
 
 
-# In[668]:
+# In[990]:
 
 hist_boxplot(train['BsmtFinSF1'])
 
 
-# In[669]:
+# In[991]:
 
 value_counts_and_info(train['BsmtFinType2'])
 
 
-# In[670]:
+# In[992]:
 
 hist_boxplot(train['BsmtFinSF2'])
 
 
-# In[671]:
+# In[993]:
 
 hist_and_info(train['BsmtUnfSF'])
 
 
-# In[672]:
+# In[994]:
 
 hist_boxplot(train['TotalBsmtSF'])
 
 
-# In[673]:
+# In[995]:
 
 value_counts_and_info(train['Heating'])
 
 
-# In[674]:
+# In[996]:
 
 value_counts_and_info(train['HeatingQC'])
 
 
-# In[675]:
+# In[997]:
 
 value_counts_and_info(train['CentralAir'])
 
 
-# In[676]:
+# In[998]:
 
 value_counts_and_info(train['Electrical'])
 
 
-# In[677]:
+# In[999]:
 
 hist_boxplot(train['1stFlrSF'])
 
 
-# In[678]:
+# In[1000]:
 
 hist_boxplot(train['2ndFlrSF'])
 
 
-# In[679]:
+# In[1001]:
 
 hist_boxplot(train['LowQualFinSF'])
 
 
-# In[680]:
+# In[1002]:
 
 hist_boxplot(train['GrLivArea'])
 
 
-# In[714]:
+# In[1003]:
 
 value_counts_and_info(train['BsmtFullBath'])
 
 
-# In[682]:
+# In[1004]:
 
 value_counts_and_info(train['BsmtHalfBath'])
 
 
-# In[683]:
+# In[1005]:
 
 value_counts_and_info(train['FullBath'])
 
 
-# In[684]:
+# In[1006]:
 
 value_counts_and_info(train['HalfBath'])
 
 
-# In[685]:
+# In[1007]:
 
 value_counts_and_info(train['BedroomAbvGr'])
 
 
-# In[686]:
+# In[1008]:
 
 value_counts_and_info(train['KitchenAbvGr'])
 
 
-# In[687]:
+# In[1009]:
 
 value_counts_and_info(train['KitchenQual'])
 
 
-# In[688]:
+# In[1010]:
 
 value_counts_and_info(train['TotRmsAbvGrd'])
 
 
-# In[689]:
+# In[1011]:
 
 value_counts_and_info(train['Functional'])
 
 
-# In[690]:
+# In[1012]:
 
 value_counts_and_info(train['Fireplaces'])
 
 
-# In[691]:
+# In[1013]:
 
 value_counts_and_info(train['FireplaceQu'])
 
 
-# In[692]:
+# In[1014]:
 
 value_counts_and_info(train['GarageType'])
 
 
-# In[693]:
+# In[1015]:
 
 hist_and_info(train['GarageYrBlt'])
 
 
-# In[694]:
+# In[1016]:
 
 value_counts_and_info(train['GarageFinish'])
 
 
-# In[695]:
+# In[1017]:
 
 value_counts_and_info(train['GarageCars'])
 
 
-# In[715]:
+# In[1018]:
 
 hist_boxplot(train['GarageArea'])
 
 
-# In[697]:
+# In[1019]:
 
 value_counts_and_info(train['GarageQual'])
 
 
-# In[698]:
+# In[1020]:
 
 value_counts_and_info(train['GarageCond'])
 
 
-# In[699]:
+# In[1021]:
 
 value_counts_and_info(train['PavedDrive'])
 
 
-# In[700]:
+# In[1022]:
 
 hist_boxplot(train['WoodDeckSF'])
 
 
-# In[701]:
+# In[1023]:
 
 hist_boxplot(train['OpenPorchSF'])
 
 
-# In[702]:
+# In[1024]:
 
 hist_boxplot(train['EnclosedPorch'])
 
 
-# In[703]:
+# In[1025]:
 
 hist_boxplot(train['3SsnPorch'])
 
 
-# In[704]:
+# In[1026]:
 
 hist_and_info(train['ScreenPorch'])
 
 
-# In[705]:
+# In[1027]:
 
 hist_and_info(train['PoolArea'])
 
 
-# In[706]:
+# In[1028]:
 
 value_counts_and_info(train['PoolQC'])
 
 
-# In[707]:
+# In[1029]:
 
 value_counts_and_info(train['Fence'])
 
 
-# In[708]:
+# In[1030]:
 
 value_counts_and_info(train['MiscFeature'])
 
 
-# In[709]:
+# In[1031]:
 
 value_counts_and_info(train['MiscVal'])
 
 
-# In[710]:
+# In[1032]:
 
 value_counts_and_info(train['MoSold'])
 
 
-# In[711]:
+# In[1033]:
 
 value_counts_and_info(train['YrSold'])
 
 
-# In[712]:
+# In[1034]:
 
 value_counts_and_info(train['SaleType'])
 
 
-# In[713]:
+# In[1035]:
 
 value_counts_and_info(train['SaleCondition'])
 
