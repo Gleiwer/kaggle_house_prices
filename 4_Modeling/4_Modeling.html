@@ -13814,7 +13814,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[246]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
@@ -13829,6 +13829,15 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numbers</span> <span class="k">import</span> <span class="n">Number</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">import</span> <span class="nn">sklearn.metrics</span> <span class="k">as</span> <span class="nn">metrics</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">GradientBoostingRegressor</span><span class="p">,</span> <span class="n">VotingClassifier</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13838,14 +13847,56 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[185]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_dataframe</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/train_dummied.csv&quot;</span><span class="p">)</span>
-<span class="k">del</span> <span class="n">train_dataframe</span><span class="p">[</span><span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">]</span>
-<span class="n">train_dataframe</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span>
-<span class="n">y_train</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_dataframe</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
+<span class="n">train_dataframe</span><span class="o">=</span><span class="n">train_dataframe</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_dataframe</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
 <span class="k">del</span> <span class="n">train_dataframe</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span>
+<span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_dataframe</span><span class="p">)</span>
+
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[186]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_lr</span><span class="o">=</span><span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[187]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_lr</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -13857,1531 +13908,354 @@ div#notebook {
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt"></div>
 
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>MSSubClass</th>
-      <th>LotFrontage</th>
-      <th>LotArea</th>
-      <th>OverallQual</th>
-      <th>OverallCond</th>
-      <th>YearBuilt</th>
-      <th>YearRemodAdd</th>
-      <th>MasVnrArea</th>
-      <th>BsmtFinSF1</th>
-      <th>BsmtFinSF2</th>
-      <th>...</th>
-      <th>SaleType_ConLw</th>
-      <th>SaleType_New</th>
-      <th>SaleType_Oth</th>
-      <th>SaleType_WD</th>
-      <th>SaleCondition_Abnorml</th>
-      <th>SaleCondition_AdjLand</th>
-      <th>SaleCondition_Alloca</th>
-      <th>SaleCondition_Family</th>
-      <th>SaleCondition_Normal</th>
-      <th>SaleCondition_Partial</th>
-    </tr>
-    <tr>
-      <th>Id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>60</td>
-      <td>65.0</td>
-      <td>8450</td>
-      <td>7</td>
-      <td>5</td>
-      <td>2003</td>
-      <td>2003</td>
-      <td>196.0</td>
-      <td>706</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>20</td>
-      <td>80.0</td>
-      <td>9600</td>
-      <td>6</td>
-      <td>8</td>
-      <td>1976</td>
-      <td>1976</td>
-      <td>0.0</td>
-      <td>978</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>60</td>
-      <td>68.0</td>
-      <td>11250</td>
-      <td>7</td>
-      <td>5</td>
-      <td>2001</td>
-      <td>2002</td>
-      <td>162.0</td>
-      <td>486</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>70</td>
-      <td>60.0</td>
-      <td>9550</td>
-      <td>7</td>
-      <td>5</td>
-      <td>1915</td>
-      <td>1970</td>
-      <td>0.0</td>
-      <td>216</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>60</td>
-      <td>84.0</td>
-      <td>14260</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2000</td>
-      <td>2000</td>
-      <td>350.0</td>
-      <td>655</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>50</td>
-      <td>85.0</td>
-      <td>14115</td>
-      <td>5</td>
-      <td>5</td>
-      <td>1993</td>
-      <td>1995</td>
-      <td>0.0</td>
-      <td>732</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>20</td>
-      <td>75.0</td>
-      <td>10084</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2004</td>
-      <td>2005</td>
-      <td>186.0</td>
-      <td>1369</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>50</td>
-      <td>51.0</td>
-      <td>6120</td>
-      <td>7</td>
-      <td>5</td>
-      <td>1931</td>
-      <td>1950</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>190</td>
-      <td>50.0</td>
-      <td>7420</td>
-      <td>5</td>
-      <td>6</td>
-      <td>1939</td>
-      <td>1950</td>
-      <td>0.0</td>
-      <td>851</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>20</td>
-      <td>70.0</td>
-      <td>11200</td>
-      <td>5</td>
-      <td>5</td>
-      <td>1965</td>
-      <td>1965</td>
-      <td>0.0</td>
-      <td>906</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>60</td>
-      <td>85.0</td>
-      <td>11924</td>
-      <td>9</td>
-      <td>5</td>
-      <td>2005</td>
-      <td>2006</td>
-      <td>286.0</td>
-      <td>998</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>20</td>
-      <td>91.0</td>
-      <td>10652</td>
-      <td>7</td>
-      <td>5</td>
-      <td>2006</td>
-      <td>2007</td>
-      <td>306.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>45</td>
-      <td>51.0</td>
-      <td>6120</td>
-      <td>7</td>
-      <td>8</td>
-      <td>1929</td>
-      <td>2001</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>90</td>
-      <td>72.0</td>
-      <td>10791</td>
-      <td>4</td>
-      <td>5</td>
-      <td>1967</td>
-      <td>1967</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>20</td>
-      <td>66.0</td>
-      <td>13695</td>
-      <td>5</td>
-      <td>5</td>
-      <td>2004</td>
-      <td>2004</td>
-      <td>0.0</td>
-      <td>646</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>20</td>
-      <td>70.0</td>
-      <td>7560</td>
-      <td>5</td>
-      <td>6</td>
-      <td>1958</td>
-      <td>1965</td>
-      <td>0.0</td>
-      <td>504</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>60</td>
-      <td>101.0</td>
-      <td>14215</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2005</td>
-      <td>2006</td>
-      <td>380.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>45</td>
-      <td>57.0</td>
-      <td>7449</td>
-      <td>7</td>
-      <td>7</td>
-      <td>1930</td>
-      <td>1950</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>20</td>
-      <td>75.0</td>
-      <td>9742</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2002</td>
-      <td>2002</td>
-      <td>281.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>120</td>
-      <td>44.0</td>
-      <td>4224</td>
-      <td>5</td>
-      <td>7</td>
-      <td>1976</td>
-      <td>1976</td>
-      <td>0.0</td>
-      <td>840</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>20</td>
-      <td>110.0</td>
-      <td>14230</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2007</td>
-      <td>2007</td>
-      <td>640.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>20</td>
-      <td>60.0</td>
-      <td>7200</td>
-      <td>5</td>
-      <td>7</td>
-      <td>1951</td>
-      <td>2000</td>
-      <td>0.0</td>
-      <td>234</td>
-      <td>486</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>20</td>
-      <td>98.0</td>
-      <td>11478</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2007</td>
-      <td>2008</td>
-      <td>200.0</td>
-      <td>1218</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>20</td>
-      <td>47.0</td>
-      <td>16321</td>
-      <td>5</td>
-      <td>6</td>
-      <td>1957</td>
-      <td>1997</td>
-      <td>0.0</td>
-      <td>1277</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>30</td>
-      <td>60.0</td>
-      <td>6324</td>
-      <td>4</td>
-      <td>6</td>
-      <td>1927</td>
-      <td>1950</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>70</td>
-      <td>50.0</td>
-      <td>8500</td>
-      <td>4</td>
-      <td>4</td>
-      <td>1920</td>
-      <td>1950</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>20</td>
-      <td>85.0</td>
-      <td>11049</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2007</td>
-      <td>2007</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>20</td>
-      <td>70.0</td>
-      <td>10552</td>
-      <td>5</td>
-      <td>5</td>
-      <td>1959</td>
-      <td>1959</td>
-      <td>0.0</td>
-      <td>1018</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>120</td>
-      <td>60.0</td>
-      <td>7313</td>
-      <td>9</td>
-      <td>5</td>
-      <td>2005</td>
-      <td>2005</td>
-      <td>246.0</td>
-      <td>1153</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>60</td>
-      <td>108.0</td>
-      <td>13418</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2004</td>
-      <td>2005</td>
-      <td>132.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1426</th>
-      <td>20</td>
-      <td>80.0</td>
-      <td>10721</td>
-      <td>6</td>
-      <td>6</td>
-      <td>1959</td>
-      <td>1959</td>
-      <td>243.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1427</th>
-      <td>60</td>
-      <td>81.0</td>
-      <td>10944</td>
-      <td>7</td>
-      <td>5</td>
-      <td>1994</td>
-      <td>1994</td>
-      <td>448.0</td>
-      <td>1000</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1428</th>
-      <td>50</td>
-      <td>60.0</td>
-      <td>10930</td>
-      <td>5</td>
-      <td>6</td>
-      <td>1945</td>
-      <td>1950</td>
-      <td>0.0</td>
-      <td>580</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1429</th>
-      <td>30</td>
-      <td>60.0</td>
-      <td>7200</td>
-      <td>5</td>
-      <td>7</td>
-      <td>1940</td>
-      <td>1992</td>
-      <td>294.0</td>
-      <td>510</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1431</th>
-      <td>60</td>
-      <td>60.0</td>
-      <td>21930</td>
-      <td>5</td>
-      <td>5</td>
-      <td>2005</td>
-      <td>2005</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1433</th>
-      <td>30</td>
-      <td>60.0</td>
-      <td>10800</td>
-      <td>4</td>
-      <td>6</td>
-      <td>1927</td>
-      <td>2007</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1434</th>
-      <td>60</td>
-      <td>93.0</td>
-      <td>10261</td>
-      <td>6</td>
-      <td>5</td>
-      <td>2000</td>
-      <td>2000</td>
-      <td>318.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1435</th>
-      <td>20</td>
-      <td>80.0</td>
-      <td>17400</td>
-      <td>5</td>
-      <td>5</td>
-      <td>1977</td>
-      <td>1977</td>
-      <td>0.0</td>
-      <td>936</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1436</th>
-      <td>20</td>
-      <td>80.0</td>
-      <td>8400</td>
-      <td>6</td>
-      <td>9</td>
-      <td>1962</td>
-      <td>2005</td>
-      <td>237.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1437</th>
-      <td>20</td>
-      <td>60.0</td>
-      <td>9000</td>
-      <td>4</td>
-      <td>6</td>
-      <td>1971</td>
-      <td>1971</td>
-      <td>0.0</td>
-      <td>616</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1438</th>
-      <td>20</td>
-      <td>96.0</td>
-      <td>12444</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2008</td>
-      <td>2008</td>
-      <td>426.0</td>
-      <td>1336</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1439</th>
-      <td>20</td>
-      <td>90.0</td>
-      <td>7407</td>
-      <td>6</td>
-      <td>7</td>
-      <td>1957</td>
-      <td>1996</td>
-      <td>0.0</td>
-      <td>600</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1440</th>
-      <td>60</td>
-      <td>80.0</td>
-      <td>11584</td>
-      <td>7</td>
-      <td>6</td>
-      <td>1979</td>
-      <td>1979</td>
-      <td>96.0</td>
-      <td>315</td>
-      <td>110</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1441</th>
-      <td>70</td>
-      <td>79.0</td>
-      <td>11526</td>
-      <td>6</td>
-      <td>7</td>
-      <td>1922</td>
-      <td>1994</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1443</th>
-      <td>60</td>
-      <td>85.0</td>
-      <td>11003</td>
-      <td>10</td>
-      <td>5</td>
-      <td>2008</td>
-      <td>2008</td>
-      <td>160.0</td>
-      <td>765</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1445</th>
-      <td>20</td>
-      <td>63.0</td>
-      <td>8500</td>
-      <td>7</td>
-      <td>5</td>
-      <td>2004</td>
-      <td>2004</td>
-      <td>106.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1446</th>
-      <td>85</td>
-      <td>70.0</td>
-      <td>8400</td>
-      <td>6</td>
-      <td>5</td>
-      <td>1966</td>
-      <td>1966</td>
-      <td>0.0</td>
-      <td>187</td>
-      <td>627</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1448</th>
-      <td>60</td>
-      <td>80.0</td>
-      <td>10000</td>
-      <td>8</td>
-      <td>5</td>
-      <td>1995</td>
-      <td>1996</td>
-      <td>438.0</td>
-      <td>1079</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1449</th>
-      <td>50</td>
-      <td>70.0</td>
-      <td>11767</td>
-      <td>4</td>
-      <td>7</td>
-      <td>1910</td>
-      <td>2000</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1450</th>
-      <td>180</td>
-      <td>21.0</td>
-      <td>1533</td>
-      <td>5</td>
-      <td>7</td>
-      <td>1970</td>
-      <td>1970</td>
-      <td>0.0</td>
-      <td>553</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1451</th>
-      <td>90</td>
-      <td>60.0</td>
-      <td>9000</td>
-      <td>5</td>
-      <td>5</td>
-      <td>1974</td>
-      <td>1974</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1452</th>
-      <td>20</td>
-      <td>78.0</td>
-      <td>9262</td>
-      <td>8</td>
-      <td>5</td>
-      <td>2008</td>
-      <td>2009</td>
-      <td>194.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1453</th>
-      <td>180</td>
-      <td>35.0</td>
-      <td>3675</td>
-      <td>5</td>
-      <td>5</td>
-      <td>2005</td>
-      <td>2005</td>
-      <td>80.0</td>
-      <td>547</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1454</th>
-      <td>20</td>
-      <td>90.0</td>
-      <td>17217</td>
-      <td>5</td>
-      <td>5</td>
-      <td>2006</td>
-      <td>2006</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1455</th>
-      <td>20</td>
-      <td>62.0</td>
-      <td>7500</td>
-      <td>7</td>
-      <td>5</td>
-      <td>2004</td>
-      <td>2005</td>
-      <td>0.0</td>
-      <td>410</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1456</th>
-      <td>60</td>
-      <td>62.0</td>
-      <td>7917</td>
-      <td>6</td>
-      <td>5</td>
-      <td>1999</td>
-      <td>2000</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1457</th>
-      <td>20</td>
-      <td>85.0</td>
-      <td>13175</td>
-      <td>6</td>
-      <td>6</td>
-      <td>1978</td>
-      <td>1988</td>
-      <td>119.0</td>
-      <td>790</td>
-      <td>163</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1458</th>
-      <td>70</td>
-      <td>66.0</td>
-      <td>9042</td>
-      <td>7</td>
-      <td>9</td>
-      <td>1941</td>
-      <td>2006</td>
-      <td>0.0</td>
-      <td>275</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1459</th>
-      <td>20</td>
-      <td>68.0</td>
-      <td>9717</td>
-      <td>5</td>
-      <td>6</td>
-      <td>1950</td>
-      <td>1996</td>
-      <td>0.0</td>
-      <td>49</td>
-      <td>1029</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1460</th>
-      <td>20</td>
-      <td>75.0</td>
-      <td>9937</td>
-      <td>5</td>
-      <td>6</td>
-      <td>1965</td>
-      <td>1965</td>
-      <td>0.0</td>
-      <td>830</td>
-      <td>290</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>1181 rows × 292 columns</p>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean Squared Error: 61993.8155762
+Accuracy: 0.69857 (+/- 0.11)
+</pre>
 </div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Decision-Tree-Regression">Decision Tree Regression<a class="anchor-link" href="#Decision-Tree-Regression">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[227]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_clf</span><span class="o">=</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[228]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_clf</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean Squared Error: 38301.7035845
+Accuracy: 0.69112 (+/- 0.08)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Ridge-Linear-Regression">Ridge Linear Regression<a class="anchor-link" href="#Ridge-Linear-Regression">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[242]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ridge</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ridge</span><span class="o">.</span><span class="n">fit</span> <span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_ridge</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[243]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_ridge</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">ridge</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean Squared Error: 26088.2154526
+Accuracy: 0.89496 (+/- 0.02)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lasso-Linear-Regression">Lasso Linear Regression<a class="anchor-link" href="#Lasso-Linear-Regression">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[235]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lasso</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_lasso</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[234]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_lasso</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">lasso</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean Squared Error: 27256.7193366
+Accuracy: 0.88210 (+/- 0.04)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Elastic-Net">Elastic Net<a class="anchor-link" href="#Elastic-Net">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[221]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ENST</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">ElasticNetCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> 
+                                    <span class="n">l1_ratio</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">01</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="o">.</span><span class="mi">99</span><span class="p">],</span> 
+                                    <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">ENST</span> <span class="o">=</span> <span class="n">ENST</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_enst</span> <span class="o">=</span> <span class="n">ENST</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[222]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_enst</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">ENST</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean Squared Error: 25534.9778301
+Accuracy: 0.90257 (+/- 0.02)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Gradient-Tree-Boosting">Gradient Tree Boosting<a class="anchor-link" href="#Gradient-Tree-Boosting">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[237]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gtb</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                                <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                                <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span>
+<span class="n">gtb</span> <span class="o">=</span> <span class="n">gtb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_gtb</span> <span class="o">=</span> <span class="n">gtb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[238]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_gtb</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">gtb</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean Squared Error: 27911.3402199
+Accuracy: 0.85550 (+/- 0.05)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Voting-Classifier">Voting Classifier<a class="anchor-link" href="#Voting-Classifier">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[251]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Ridge&#39;</span><span class="p">:</span><span class="n">y_pred_ridge</span><span class="p">,</span>
+                     <span class="s1">&#39;Lasso&#39;</span><span class="p">:</span><span class="n">y_pred_lasso</span><span class="p">,</span>
+                     <span class="s1">&#39;ENST&#39;</span><span class="p">:</span><span class="n">y_pred_enst</span><span class="p">,</span>
+                     <span class="s1">&#39;test&#39;</span><span class="p">:</span><span class="n">y_test</span><span class="p">})</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[252]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stacker</span><span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">stacker</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">results</span><span class="p">[[</span><span class="s1">&#39;Ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;ENST&#39;</span><span class="p">]],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[252]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)</pre>
 </div>
 
 </div>
@@ -15392,13 +14266,565 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[254]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">stacker</span><span class="p">,</span> <span class="n">results</span><span class="p">[[</span><span class="s1">&#39;Ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;ENST&#39;</span><span class="p">]],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.5f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Accuracy: 0.91873 (+/- 0.07)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[256]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;stacked&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">stacker</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">results</span><span class="p">[[</span><span class="s1">&#39;Ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;ENST&#39;</span><span class="p">]])</span>
+<span class="n">results</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[256]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ENST</th>
+      <th>Lasso</th>
+      <th>Ridge</th>
+      <th>test</th>
+      <th>stacked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>68995.677686</td>
+      <td>76628.827971</td>
+      <td>73105.452405</td>
+      <td>55000</td>
+      <td>73151.828180</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>159820.261387</td>
+      <td>164483.354949</td>
+      <td>163652.189950</td>
+      <td>158000</td>
+      <td>161229.272736</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>80367.085935</td>
+      <td>105099.914877</td>
+      <td>98498.865429</td>
+      <td>40000</td>
+      <td>90614.472417</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>247087.374991</td>
+      <td>212428.412583</td>
+      <td>223903.122387</td>
+      <td>197000</td>
+      <td>235163.121582</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>231148.298828</td>
+      <td>230851.912703</td>
+      <td>231006.771087</td>
+      <td>212900</td>
+      <td>227697.525492</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>114401.590909</td>
+      <td>123662.353000</td>
+      <td>133484.068351</td>
+      <td>120500</td>
+      <td>131652.929778</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>93204.773168</td>
+      <td>88571.590258</td>
+      <td>90184.115893</td>
+      <td>95000</td>
+      <td>94701.235009</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>197384.915682</td>
+      <td>210625.423422</td>
+      <td>210776.816863</td>
+      <td>176000</td>
+      <td>203156.240088</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>140668.196396</td>
+      <td>159916.986399</td>
+      <td>152958.953381</td>
+      <td>153337</td>
+      <td>144806.745442</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>231300.864739</td>
+      <td>227438.903754</td>
+      <td>227660.812684</td>
+      <td>224000</td>
+      <td>225864.748899</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>152491.080864</td>
+      <td>148082.720189</td>
+      <td>144455.531820</td>
+      <td>145000</td>
+      <td>146044.321375</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>282689.206942</td>
+      <td>292475.604271</td>
+      <td>288477.809311</td>
+      <td>235000</td>
+      <td>278442.015878</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>187370.051034</td>
+      <td>175763.163247</td>
+      <td>175078.680321</td>
+      <td>188500</td>
+      <td>178402.946425</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>293108.028929</td>
+      <td>302157.634320</td>
+      <td>300146.031978</td>
+      <td>280000</td>
+      <td>290090.459335</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>122214.456641</td>
+      <td>71415.221459</td>
+      <td>91168.979557</td>
+      <td>122000</td>
+      <td>115101.250398</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>202121.885147</td>
+      <td>203967.700598</td>
+      <td>203176.405705</td>
+      <td>195400</td>
+      <td>200144.246148</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>184419.856619</td>
+      <td>181277.452740</td>
+      <td>181841.649485</td>
+      <td>163990</td>
+      <td>181764.202603</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>213709.540623</td>
+      <td>215910.297593</td>
+      <td>215199.617264</td>
+      <td>192000</td>
+      <td>211525.511913</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>432358.780492</td>
+      <td>492240.621946</td>
+      <td>489373.159472</td>
+      <td>438780</td>
+      <td>451701.863886</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>382940.575011</td>
+      <td>390686.159456</td>
+      <td>391527.495635</td>
+      <td>380000</td>
+      <td>378345.855448</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>106119.009278</td>
+      <td>105337.145803</td>
+      <td>108365.423245</td>
+      <td>127000</td>
+      <td>110773.057156</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>71738.894250</td>
+      <td>81643.064758</td>
+      <td>79025.828897</td>
+      <td>135000</td>
+      <td>78040.717209</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>227803.688432</td>
+      <td>232685.716922</td>
+      <td>229429.392568</td>
+      <td>241500</td>
+      <td>223868.218779</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>286969.161829</td>
+      <td>287080.954995</td>
+      <td>287731.050412</td>
+      <td>324000</td>
+      <td>281888.844039</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>333440.601304</td>
+      <td>306243.356531</td>
+      <td>317231.906524</td>
+      <td>295000</td>
+      <td>321598.605090</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>119988.676614</td>
+      <td>116896.257529</td>
+      <td>117753.899204</td>
+      <td>119200</td>
+      <td>120427.602537</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>136862.596965</td>
+      <td>151453.181954</td>
+      <td>140806.765029</td>
+      <td>106000</td>
+      <td>134588.676161</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>274236.766845</td>
+      <td>269861.630006</td>
+      <td>271045.441914</td>
+      <td>269500</td>
+      <td>267685.685188</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>171035.675664</td>
+      <td>157762.798162</td>
+      <td>158855.374115</td>
+      <td>180000</td>
+      <td>163687.307454</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>389290.281120</td>
+      <td>397200.792820</td>
+      <td>396964.321491</td>
+      <td>402861</td>
+      <td>383379.882142</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>207</th>
+      <td>258224.640070</td>
+      <td>282367.517221</td>
+      <td>281730.019077</td>
+      <td>269790</td>
+      <td>266827.415548</td>
+    </tr>
+    <tr>
+      <th>208</th>
+      <td>136710.959235</td>
+      <td>143282.735037</td>
+      <td>142251.374113</td>
+      <td>136000</td>
+      <td>139994.031765</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>210792.897825</td>
+      <td>208203.385317</td>
+      <td>208415.912829</td>
+      <td>208500</td>
+      <td>206955.475056</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>420296.412538</td>
+      <td>440947.832307</td>
+      <td>440177.423783</td>
+      <td>426000</td>
+      <td>419819.758352</td>
+    </tr>
+    <tr>
+      <th>211</th>
+      <td>205502.720137</td>
+      <td>206847.857360</td>
+      <td>207044.938413</td>
+      <td>200000</td>
+      <td>204137.071010</td>
+    </tr>
+    <tr>
+      <th>212</th>
+      <td>121305.790895</td>
+      <td>125881.759628</td>
+      <td>126290.899502</td>
+      <td>132000</td>
+      <td>125622.624746</td>
+    </tr>
+    <tr>
+      <th>213</th>
+      <td>263112.660954</td>
+      <td>283864.835744</td>
+      <td>284263.955398</td>
+      <td>260000</td>
+      <td>270652.610785</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>149089.974970</td>
+      <td>125879.238359</td>
+      <td>128303.411528</td>
+      <td>155000</td>
+      <td>138374.550007</td>
+    </tr>
+    <tr>
+      <th>215</th>
+      <td>309800.707929</td>
+      <td>322910.802356</td>
+      <td>322627.295681</td>
+      <td>309000</td>
+      <td>310229.408813</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>168218.777061</td>
+      <td>161356.951601</td>
+      <td>159188.303528</td>
+      <td>153000</td>
+      <td>161230.182445</td>
+    </tr>
+    <tr>
+      <th>217</th>
+      <td>114409.113907</td>
+      <td>112586.102616</td>
+      <td>114832.611310</td>
+      <td>128000</td>
+      <td>117283.999252</td>
+    </tr>
+    <tr>
+      <th>218</th>
+      <td>228682.917033</td>
+      <td>232014.563238</td>
+      <td>231623.616056</td>
+      <td>225000</td>
+      <td>226846.415840</td>
+    </tr>
+    <tr>
+      <th>219</th>
+      <td>188681.248130</td>
+      <td>159598.927894</td>
+      <td>161112.837210</td>
+      <td>169000</td>
+      <td>171935.335345</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>215138.729533</td>
+      <td>219368.574621</td>
+      <td>219278.366816</td>
+      <td>194000</td>
+      <td>214715.639515</td>
+    </tr>
+    <tr>
+      <th>221</th>
+      <td>87642.876760</td>
+      <td>88817.864095</td>
+      <td>90257.408559</td>
+      <td>94500</td>
+      <td>92533.260978</td>
+    </tr>
+    <tr>
+      <th>222</th>
+      <td>132332.136617</td>
+      <td>143224.855422</td>
+      <td>141041.793162</td>
+      <td>136500</td>
+      <td>137069.396922</td>
+    </tr>
+    <tr>
+      <th>223</th>
+      <td>114647.975636</td>
+      <td>120180.471838</td>
+      <td>119334.366917</td>
+      <td>119000</td>
+      <td>118473.025874</td>
+    </tr>
+    <tr>
+      <th>224</th>
+      <td>70041.891056</td>
+      <td>69540.484043</td>
+      <td>67375.432529</td>
+      <td>96500</td>
+      <td>70912.473568</td>
+    </tr>
+    <tr>
+      <th>225</th>
+      <td>152911.065604</td>
+      <td>146008.771928</td>
+      <td>146535.355341</td>
+      <td>174000</td>
+      <td>149401.948458</td>
+    </tr>
+    <tr>
+      <th>226</th>
+      <td>292835.731019</td>
+      <td>294550.046350</td>
+      <td>292603.326803</td>
+      <td>275000</td>
+      <td>285681.681378</td>
+    </tr>
+    <tr>
+      <th>227</th>
+      <td>180667.830539</td>
+      <td>173267.138819</td>
+      <td>173962.879330</td>
+      <td>175500</td>
+      <td>175863.779697</td>
+    </tr>
+    <tr>
+      <th>228</th>
+      <td>201831.341863</td>
+      <td>161000.488007</td>
+      <td>175961.906521</td>
+      <td>135000</td>
+      <td>191979.175945</td>
+    </tr>
+    <tr>
+      <th>229</th>
+      <td>206586.707907</td>
+      <td>206532.724311</td>
+      <td>204985.888852</td>
+      <td>172500</td>
+      <td>202527.636184</td>
+    </tr>
+    <tr>
+      <th>230</th>
+      <td>189503.269730</td>
+      <td>185012.151530</td>
+      <td>186052.493862</td>
+      <td>196000</td>
+      <td>186358.024330</td>
+    </tr>
+    <tr>
+      <th>231</th>
+      <td>145930.573744</td>
+      <td>144201.773572</td>
+      <td>147113.910223</td>
+      <td>137500</td>
+      <td>148214.782672</td>
+    </tr>
+    <tr>
+      <th>232</th>
+      <td>106373.378705</td>
+      <td>113729.861330</td>
+      <td>114013.098365</td>
+      <td>112500</td>
+      <td>112794.219009</td>
+    </tr>
+    <tr>
+      <th>233</th>
+      <td>222681.762087</td>
+      <td>227239.967270</td>
+      <td>226069.945800</td>
+      <td>204000</td>
+      <td>220983.782643</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>90003.681696</td>
+      <td>87808.907097</td>
+      <td>89772.537720</td>
+      <td>108500</td>
+      <td>93409.782546</td>
+    </tr>
+    <tr>
+      <th>235</th>
+      <td>148738.623915</td>
+      <td>159305.492655</td>
+      <td>160372.841706</td>
+      <td>147000</td>
+      <td>156021.523665</td>
+    </tr>
+    <tr>
+      <th>236</th>
+      <td>158095.357532</td>
+      <td>158566.471863</td>
+      <td>157451.126502</td>
+      <td>157000</td>
+      <td>156868.097340</td>
+    </tr>
+  </tbody>
+</table>
+<p>237 rows × 5 columns</p>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
