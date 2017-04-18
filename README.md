@@ -12,4 +12,4 @@ This is a Data Mining model, made for the house prices contest in [Kaggle.com](h
 
 ## License
 
-This models was released under the (GNU GENERAL PUBLIC LICENSE)[LICENSE.txt]
+This models was released under the [GNU GENERAL PUBLIC LICENSE](LICENSE.txt)
