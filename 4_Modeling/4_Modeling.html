@@ -13814,7 +13814,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[257]:</div>
+<div class="prompt input_prompt">In&nbsp;[320]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
@@ -13847,7 +13847,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[275]:</div>
+<div class="prompt input_prompt">In&nbsp;[321]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_dataframe</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/train_dummied.csv&quot;</span><span class="p">)</span>
@@ -13865,95 +13865,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[277]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/pandas/indexes/base.py</span> in <span class="ansi-cyan-fg">get_loc</span><span class="ansi-blue-fg">(self, key, method, tolerance)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2133</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 2134</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_engine<span class="ansi-blue-fg">.</span>get_loc<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2135</span>             <span class="ansi-green-fg">except</span> KeyError<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">pandas/index.pyx</span> in <span class="ansi-cyan-fg">pandas.index.IndexEngine.get_loc (pandas/index.c:4443)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/index.pyx</span> in <span class="ansi-cyan-fg">pandas.index.IndexEngine.get_loc (pandas/index.c:4289)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/src/hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas.hashtable.PyObjectHashTable.get_item (pandas/hashtable.c:13733)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/src/hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas.hashtable.PyObjectHashTable.get_item (pandas/hashtable.c:13687)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-red-fg">KeyError</span>: &#39;SalePrice&#39;
-
-During handling of the above exception, another exception occurred:
-
-<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-277-1896a0420057&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>train_dataframe<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;SalePrice&#39;</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/pandas/core/frame.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2057</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_getitem_multilevel<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2058</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 2059</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_getitem_column<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2060</span> 
-<span class="ansi-green-intense-fg ansi-bold">   2061</span>     <span class="ansi-green-fg">def</span> _getitem_column<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/pandas/core/frame.py</span> in <span class="ansi-cyan-fg">_getitem_column</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2064</span>         <span class="ansi-red-fg"># get column</span>
-<span class="ansi-green-intense-fg ansi-bold">   2065</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>columns<span class="ansi-blue-fg">.</span>is_unique<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 2066</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_get_item_cache<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2067</span> 
-<span class="ansi-green-intense-fg ansi-bold">   2068</span>         <span class="ansi-red-fg"># duplicate columns &amp; possible reduce dimensionality</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">_get_item_cache</span><span class="ansi-blue-fg">(self, item)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1384</span>         res <span class="ansi-blue-fg">=</span> cache<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1385</span>         <span class="ansi-green-fg">if</span> res <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1386</span><span class="ansi-red-fg">             </span>values <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_data<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1387</span>             res <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_box_item_values<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">,</span> values<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1388</span>             cache<span class="ansi-blue-fg">[</span>item<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> res
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/pandas/core/internals.py</span> in <span class="ansi-cyan-fg">get</span><span class="ansi-blue-fg">(self, item, fastpath)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3539</span> 
-<span class="ansi-green-intense-fg ansi-bold">   3540</span>             <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> isnull<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 3541</span><span class="ansi-red-fg">                 </span>loc <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">.</span>get_loc<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3542</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   3543</span>                 indexer <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>arange<span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span>isnull<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/pandas/indexes/base.py</span> in <span class="ansi-cyan-fg">get_loc</span><span class="ansi-blue-fg">(self, key, method, tolerance)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2134</span>                 <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_engine<span class="ansi-blue-fg">.</span>get_loc<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2135</span>             <span class="ansi-green-fg">except</span> KeyError<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 2136</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_engine<span class="ansi-blue-fg">.</span>get_loc<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_maybe_cast_indexer<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2137</span> 
-<span class="ansi-green-intense-fg ansi-bold">   2138</span>         indexer <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>get_indexer<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>key<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> method<span class="ansi-blue-fg">=</span>method<span class="ansi-blue-fg">,</span> tolerance<span class="ansi-blue-fg">=</span>tolerance<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">pandas/index.pyx</span> in <span class="ansi-cyan-fg">pandas.index.IndexEngine.get_loc (pandas/index.c:4443)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/index.pyx</span> in <span class="ansi-cyan-fg">pandas.index.IndexEngine.get_loc (pandas/index.c:4289)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/src/hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas.hashtable.PyObjectHashTable.get_item (pandas/hashtable.c:13733)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/src/hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas.hashtable.PyObjectHashTable.get_item (pandas/hashtable.c:13687)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-red-fg">KeyError</span>: &#39;SalePrice&#39;</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13969,7 +13887,7 @@ During handling of the above exception, another exception occurred:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[259]:</div>
+<div class="prompt input_prompt">In&nbsp;[322]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -13984,7 +13902,7 @@ During handling of the above exception, another exception occurred:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[260]:</div>
+<div class="prompt input_prompt">In&nbsp;[323]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_lr</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
@@ -14004,8 +13922,8 @@ During handling of the above exception, another exception occurred:
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mean Squared Error: 49805.5908092
-Accuracy: 0.72980 (+/- 0.12)
+<pre>Mean Squared Error: 43524.2943244
+Accuracy: 0.70349 (+/- 0.19)
 </pre>
 </div>
 </div>
@@ -14025,7 +13943,7 @@ Accuracy: 0.72980 (+/- 0.12)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[261]:</div>
+<div class="prompt input_prompt">In&nbsp;[324]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
@@ -14040,7 +13958,7 @@ Accuracy: 0.72980 (+/- 0.12)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[262]:</div>
+<div class="prompt input_prompt">In&nbsp;[325]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_clf</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
@@ -14060,8 +13978,8 @@ Accuracy: 0.72980 (+/- 0.12)
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mean Squared Error: 33225.3529899
-Accuracy: 0.76537 (+/- 0.07)
+<pre>Mean Squared Error: 40798.2651954
+Accuracy: 0.72007 (+/- 0.16)
 </pre>
 </div>
 </div>
@@ -14081,7 +13999,7 @@ Accuracy: 0.76537 (+/- 0.07)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[263]:</div>
+<div class="prompt input_prompt">In&nbsp;[326]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ridge</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
@@ -14096,7 +14014,7 @@ Accuracy: 0.76537 (+/- 0.07)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[264]:</div>
+<div class="prompt input_prompt">In&nbsp;[327]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_ridge</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
@@ -14116,8 +14034,8 @@ Accuracy: 0.76537 (+/- 0.07)
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mean Squared Error: 22510.7073937
-Accuracy: 0.89722 (+/- 0.03)
+<pre>Mean Squared Error: 23140.9730422
+Accuracy: 0.89108 (+/- 0.03)
 </pre>
 </div>
 </div>
@@ -14137,7 +14055,7 @@ Accuracy: 0.89722 (+/- 0.03)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[265]:</div>
+<div class="prompt input_prompt">In&nbsp;[328]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lasso</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
@@ -14152,7 +14070,7 @@ Accuracy: 0.89722 (+/- 0.03)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[266]:</div>
+<div class="prompt input_prompt">In&nbsp;[329]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_lasso</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
@@ -14172,8 +14090,8 @@ Accuracy: 0.89722 (+/- 0.03)
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mean Squared Error: 22811.4804301
-Accuracy: 0.88735 (+/- 0.04)
+<pre>Mean Squared Error: 23863.1624051
+Accuracy: 0.87599 (+/- 0.03)
 </pre>
 </div>
 </div>
@@ -14193,7 +14111,7 @@ Accuracy: 0.88735 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[267]:</div>
+<div class="prompt input_prompt">In&nbsp;[330]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ENST</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">ElasticNetCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> 
@@ -14210,7 +14128,7 @@ Accuracy: 0.88735 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[268]:</div>
+<div class="prompt input_prompt">In&nbsp;[331]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_enst</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
@@ -14230,8 +14148,8 @@ Accuracy: 0.88735 (+/- 0.04)
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mean Squared Error: 20408.8095899
-Accuracy: 0.90297 (+/- 0.03)
+<pre>Mean Squared Error: 21897.8597481
+Accuracy: 0.90089 (+/- 0.04)
 </pre>
 </div>
 </div>
@@ -14251,7 +14169,7 @@ Accuracy: 0.90297 (+/- 0.03)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[269]:</div>
+<div class="prompt input_prompt">In&nbsp;[332]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gtb</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
@@ -14270,7 +14188,7 @@ Accuracy: 0.90297 (+/- 0.03)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[270]:</div>
+<div class="prompt input_prompt">In&nbsp;[333]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Mean Squared Error:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred_gtb</span><span class="p">,</span><span class="n">y_test</span><span class="p">)))</span>
@@ -14290,8 +14208,8 @@ Accuracy: 0.90297 (+/- 0.03)
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mean Squared Error: 27308.4977026
-Accuracy: 0.87753 (+/- 0.04)
+<pre>Mean Squared Error: 27132.0037243
+Accuracy: 0.86205 (+/- 0.06)
 </pre>
 </div>
 </div>
@@ -14311,7 +14229,7 @@ Accuracy: 0.87753 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[271]:</div>
+<div class="prompt input_prompt">In&nbsp;[334]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Ridge&#39;</span><span class="p">:</span><span class="n">y_pred_ridge</span><span class="p">,</span>
@@ -14327,7 +14245,7 @@ Accuracy: 0.87753 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[272]:</div>
+<div class="prompt input_prompt">In&nbsp;[335]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">stacker</span><span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
@@ -14343,7 +14261,7 @@ Accuracy: 0.87753 (+/- 0.04)
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[272]:</div>
+<div class="prompt output_prompt">Out[335]:</div>
 
 
 
@@ -14359,7 +14277,7 @@ Accuracy: 0.87753 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[273]:</div>
+<div class="prompt input_prompt">In&nbsp;[336]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">stacker</span><span class="p">,</span> <span class="n">results</span><span class="p">[[</span><span class="s1">&#39;Ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;ENST&#39;</span><span class="p">]],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -14378,7 +14296,7 @@ Accuracy: 0.87753 (+/- 0.04)
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Accuracy: 0.92059 (+/- 0.02)
+<pre>Accuracy: 0.90575 (+/- 0.13)
 </pre>
 </div>
 </div>
@@ -14389,7 +14307,7 @@ Accuracy: 0.87753 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[274]:</div>
+<div class="prompt input_prompt">In&nbsp;[337]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;stacked&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">stacker</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">results</span><span class="p">[[</span><span class="s1">&#39;Ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;ENST&#39;</span><span class="p">]])</span>
@@ -14405,7 +14323,7 @@ Accuracy: 0.87753 (+/- 0.04)
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[274]:</div>
+<div class="prompt output_prompt">Out[337]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14424,243 +14342,243 @@ Accuracy: 0.87753 (+/- 0.04)
   <tbody>
     <tr>
       <th>0</th>
-      <td>139793.370683</td>
-      <td>139455.830522</td>
-      <td>138663.267430</td>
-      <td>142953.0</td>
-      <td>142626.498877</td>
+      <td>100824.810580</td>
+      <td>111435.968467</td>
+      <td>113765.913283</td>
+      <td>123000.0</td>
+      <td>107937.551568</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>367907.937438</td>
-      <td>379347.657935</td>
-      <td>377585.526559</td>
-      <td>310000.0</td>
-      <td>357473.075624</td>
+      <td>265448.437574</td>
+      <td>270733.034297</td>
+      <td>271701.759842</td>
+      <td>275500.0</td>
+      <td>258636.086312</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>187694.539601</td>
-      <td>184974.915252</td>
-      <td>184743.553049</td>
-      <td>183500.0</td>
-      <td>188087.799309</td>
+      <td>199444.072393</td>
+      <td>196495.658876</td>
+      <td>197255.883912</td>
+      <td>197900.0</td>
+      <td>194558.368837</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>221691.116244</td>
-      <td>227883.602397</td>
-      <td>223090.012515</td>
-      <td>187000.0</td>
-      <td>223309.475145</td>
+      <td>152775.537635</td>
+      <td>156695.161925</td>
+      <td>155817.650843</td>
+      <td>145250.0</td>
+      <td>153011.726246</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>180810.850305</td>
-      <td>185498.656711</td>
-      <td>185363.549014</td>
-      <td>164500.0</td>
-      <td>179595.453811</td>
+      <td>293375.581376</td>
+      <td>303238.683082</td>
+      <td>304919.050384</td>
+      <td>290000.0</td>
+      <td>286295.345893</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>372207.455049</td>
-      <td>385625.696555</td>
-      <td>384563.322124</td>
-      <td>335000.0</td>
-      <td>360274.795532</td>
+      <td>153472.475914</td>
+      <td>172514.297367</td>
+      <td>171614.232599</td>
+      <td>155000.0</td>
+      <td>158659.036858</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>305836.124503</td>
-      <td>295181.095398</td>
-      <td>295851.213211</td>
-      <td>312500.0</td>
-      <td>301269.557672</td>
+      <td>319958.119971</td>
+      <td>329360.604511</td>
+      <td>331192.575206</td>
+      <td>274000.0</td>
+      <td>310871.664607</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>208576.035479</td>
-      <td>209884.220547</td>
-      <td>209235.054099</td>
-      <td>227000.0</td>
-      <td>207391.383098</td>
+      <td>234820.871338</td>
+      <td>223836.280750</td>
+      <td>214424.694296</td>
+      <td>235128.0</td>
+      <td>221733.381963</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>151338.890860</td>
-      <td>165166.752543</td>
-      <td>160364.541943</td>
-      <td>127000.0</td>
-      <td>154590.000044</td>
+      <td>126377.899904</td>
+      <td>144728.336475</td>
+      <td>145065.800916</td>
+      <td>166000.0</td>
+      <td>133637.489339</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>117548.202657</td>
-      <td>114976.747281</td>
-      <td>113038.030787</td>
-      <td>140000.0</td>
-      <td>123345.549486</td>
+      <td>95485.964372</td>
+      <td>102413.321145</td>
+      <td>102349.688877</td>
+      <td>86000.0</td>
+      <td>101051.041003</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>152542.647142</td>
-      <td>155653.862221</td>
-      <td>156605.942248</td>
-      <td>156000.0</td>
-      <td>151909.398574</td>
+      <td>67220.740807</td>
+      <td>71581.891349</td>
+      <td>71953.364429</td>
+      <td>75000.0</td>
+      <td>74083.930822</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>113975.787832</td>
-      <td>119954.873118</td>
-      <td>120409.014437</td>
-      <td>119900.0</td>
-      <td>115122.372401</td>
+      <td>120309.306107</td>
+      <td>103056.665190</td>
+      <td>103620.645907</td>
+      <td>112000.0</td>
+      <td>116281.582362</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>167405.075169</td>
-      <td>164865.006857</td>
-      <td>164005.195991</td>
-      <td>197500.0</td>
-      <td>169479.281731</td>
+      <td>201844.794616</td>
+      <td>198316.614532</td>
+      <td>198844.455486</td>
+      <td>188000.0</td>
+      <td>196526.800616</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>317252.263671</td>
-      <td>320553.351661</td>
-      <td>322594.060733</td>
-      <td>335000.0</td>
-      <td>307091.191949</td>
+      <td>140850.468029</td>
+      <td>91969.379463</td>
+      <td>89220.968183</td>
+      <td>128000.0</td>
+      <td>123902.095982</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>236535.747523</td>
-      <td>237043.231509</td>
-      <td>237836.232752</td>
-      <td>190000.0</td>
-      <td>232522.360472</td>
+      <td>320679.553380</td>
+      <td>322880.510569</td>
+      <td>323396.507549</td>
+      <td>337000.0</td>
+      <td>308767.228930</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>168268.978537</td>
-      <td>160668.076346</td>
-      <td>162273.068063</td>
-      <td>184000.0</td>
-      <td>168779.074668</td>
+      <td>201239.801197</td>
+      <td>197116.248271</td>
+      <td>196856.264510</td>
+      <td>200141.0</td>
+      <td>195534.431741</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>126967.447148</td>
-      <td>133307.635145</td>
-      <td>131313.368649</td>
-      <td>148000.0</td>
-      <td>130135.996821</td>
+      <td>193599.776246</td>
+      <td>184011.735860</td>
+      <td>186529.411870</td>
+      <td>174000.0</td>
+      <td>187453.974397</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>189235.449259</td>
-      <td>185470.959385</td>
-      <td>185467.227582</td>
-      <td>189000.0</td>
-      <td>189554.886386</td>
+      <td>120615.155414</td>
+      <td>124482.673786</td>
+      <td>123579.391465</td>
+      <td>119500.0</td>
+      <td>123123.488219</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>77366.007611</td>
-      <td>58511.983833</td>
-      <td>56760.936499</td>
-      <td>67000.0</td>
-      <td>89020.151837</td>
+      <td>309451.132833</td>
+      <td>314427.260566</td>
+      <td>314384.688475</td>
+      <td>274900.0</td>
+      <td>299094.100393</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>79192.714445</td>
-      <td>67340.515709</td>
-      <td>69721.331002</td>
-      <td>78000.0</td>
-      <td>84349.020458</td>
+      <td>190576.396347</td>
+      <td>209535.269218</td>
+      <td>206623.238215</td>
+      <td>176000.0</td>
+      <td>192489.146523</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>51850.060169</td>
-      <td>48146.173573</td>
-      <td>50323.813623</td>
-      <td>37900.0</td>
-      <td>56576.076350</td>
+      <td>267944.301151</td>
+      <td>288151.462463</td>
+      <td>281024.597175</td>
+      <td>239000.0</td>
+      <td>263495.377779</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>349682.897033</td>
-      <td>341868.696979</td>
-      <td>342696.847036</td>
-      <td>350000.0</td>
-      <td>342033.691054</td>
+      <td>121522.801981</td>
+      <td>107805.957286</td>
+      <td>110012.298144</td>
+      <td>126500.0</td>
+      <td>119065.774352</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>214664.447818</td>
-      <td>208406.480152</td>
-      <td>209801.207284</td>
-      <td>175900.0</td>
-      <td>212752.871942</td>
+      <td>218003.830230</td>
+      <td>202589.309834</td>
+      <td>205380.951086</td>
+      <td>201000.0</td>
+      <td>208267.073181</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>161421.044650</td>
-      <td>170298.701226</td>
-      <td>167599.131258</td>
-      <td>157900.0</td>
-      <td>163027.311873</td>
+      <td>170883.623056</td>
+      <td>171262.139311</td>
+      <td>171078.680592</td>
+      <td>176432.0</td>
+      <td>168859.697857</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>185845.562603</td>
-      <td>197417.465089</td>
-      <td>194825.906491</td>
-      <td>188700.0</td>
-      <td>185435.217529</td>
+      <td>132250.331345</td>
+      <td>129443.038923</td>
+      <td>129480.256865</td>
+      <td>149900.0</td>
+      <td>131996.362677</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>118344.662925</td>
-      <td>125715.712970</td>
-      <td>124848.041447</td>
-      <td>128000.0</td>
-      <td>120417.216051</td>
+      <td>226466.416338</td>
+      <td>239760.323342</td>
+      <td>240958.412759</td>
+      <td>215000.0</td>
+      <td>225158.114891</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>127475.177428</td>
-      <td>128729.599393</td>
-      <td>129459.507992</td>
-      <td>142500.0</td>
-      <td>128810.993515</td>
+      <td>145620.984555</td>
+      <td>153494.132238</td>
+      <td>153004.308478</td>
+      <td>120000.0</td>
+      <td>147792.048135</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>197700.245489</td>
-      <td>211333.426566</td>
-      <td>206717.826701</td>
-      <td>167900.0</td>
-      <td>198466.519436</td>
+      <td>305724.767091</td>
+      <td>298075.215753</td>
+      <td>299228.885812</td>
+      <td>293077.0</td>
+      <td>291808.123935</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>160570.040382</td>
-      <td>156316.902208</td>
-      <td>158118.784628</td>
-      <td>146000.0</td>
-      <td>160409.882064</td>
+      <td>228369.599719</td>
+      <td>227699.189677</td>
+      <td>227216.778765</td>
+      <td>237000.0</td>
+      <td>221803.896185</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>186350.297446</td>
-      <td>184742.152642</td>
-      <td>186346.148636</td>
-      <td>193000.0</td>
-      <td>184463.046838</td>
+      <td>123428.683208</td>
+      <td>132618.442320</td>
+      <td>130123.136423</td>
+      <td>134800.0</td>
+      <td>127026.431898</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14672,243 +14590,243 @@ Accuracy: 0.87753 (+/- 0.04)
     </tr>
     <tr>
       <th>207</th>
-      <td>208149.029686</td>
-      <td>207838.479220</td>
-      <td>208401.667894</td>
-      <td>223500.0</td>
-      <td>206020.910232</td>
+      <td>162893.673450</td>
+      <td>147783.329355</td>
+      <td>151776.211080</td>
+      <td>160000.0</td>
+      <td>157549.806654</td>
     </tr>
     <tr>
       <th>208</th>
-      <td>323123.264103</td>
-      <td>318182.015234</td>
-      <td>318808.054932</td>
-      <td>336000.0</td>
-      <td>316317.237210</td>
+      <td>196787.105530</td>
+      <td>193776.370939</td>
+      <td>193881.626617</td>
+      <td>196500.0</td>
+      <td>191876.446633</td>
     </tr>
     <tr>
       <th>209</th>
-      <td>282497.502903</td>
-      <td>266800.773904</td>
-      <td>281037.068113</td>
-      <td>262000.0</td>
-      <td>265047.775052</td>
+      <td>166002.358055</td>
+      <td>153973.419903</td>
+      <td>155705.073406</td>
+      <td>149700.0</td>
+      <td>160786.592083</td>
     </tr>
     <tr>
       <th>210</th>
-      <td>172725.599211</td>
-      <td>185965.218804</td>
-      <td>182149.051296</td>
-      <td>153000.0</td>
-      <td>173939.065693</td>
+      <td>108642.743666</td>
+      <td>114303.871691</td>
+      <td>114292.423633</td>
+      <td>108000.0</td>
+      <td>112864.332830</td>
     </tr>
     <tr>
       <th>211</th>
-      <td>222401.454710</td>
-      <td>220178.419562</td>
-      <td>221937.384366</td>
-      <td>206900.0</td>
-      <td>218686.284022</td>
+      <td>179573.193751</td>
+      <td>176752.396838</td>
+      <td>175732.112829</td>
+      <td>156932.0</td>
+      <td>175621.371395</td>
     </tr>
     <tr>
       <th>212</th>
-      <td>204672.498239</td>
-      <td>198848.923361</td>
-      <td>198608.800839</td>
-      <td>225000.0</td>
-      <td>204998.111630</td>
+      <td>163471.241083</td>
+      <td>160703.023191</td>
+      <td>161417.146448</td>
+      <td>142000.0</td>
+      <td>161200.871634</td>
     </tr>
     <tr>
       <th>213</th>
-      <td>178115.541569</td>
-      <td>166432.067287</td>
-      <td>167890.306003</td>
-      <td>155000.0</td>
-      <td>179314.732291</td>
+      <td>135158.405450</td>
+      <td>138704.154955</td>
+      <td>133790.855090</td>
+      <td>106000.0</td>
+      <td>135333.134594</td>
     </tr>
     <tr>
       <th>214</th>
-      <td>184571.792508</td>
-      <td>186300.471250</td>
-      <td>185205.896559</td>
-      <td>185500.0</td>
-      <td>184987.648418</td>
+      <td>187958.035097</td>
+      <td>180767.024836</td>
+      <td>179510.706344</td>
+      <td>166000.0</td>
+      <td>181890.443435</td>
     </tr>
     <tr>
       <th>215</th>
-      <td>160343.426250</td>
-      <td>160685.741341</td>
-      <td>160711.313078</td>
-      <td>179900.0</td>
-      <td>161054.460602</td>
+      <td>226094.264568</td>
+      <td>214823.327222</td>
+      <td>215036.066812</td>
+      <td>210000.0</td>
+      <td>216387.329126</td>
     </tr>
     <tr>
       <th>216</th>
-      <td>106401.259671</td>
-      <td>94174.866589</td>
-      <td>98370.894934</td>
-      <td>112000.0</td>
-      <td>108239.291309</td>
+      <td>211405.389174</td>
+      <td>195617.480851</td>
+      <td>197462.987960</td>
+      <td>207000.0</td>
+      <td>201735.918534</td>
     </tr>
     <tr>
       <th>217</th>
-      <td>119269.376713</td>
-      <td>132871.092600</td>
-      <td>129781.506995</td>
-      <td>120000.0</td>
-      <td>122250.989307</td>
+      <td>265105.949371</td>
+      <td>270240.016308</td>
+      <td>271180.450047</td>
+      <td>258000.0</td>
+      <td>258259.836944</td>
     </tr>
     <tr>
       <th>218</th>
-      <td>220980.370547</td>
-      <td>218381.285264</td>
-      <td>219208.625482</td>
-      <td>230000.0</td>
-      <td>218481.308715</td>
+      <td>85428.638710</td>
+      <td>120373.121875</td>
+      <td>108731.001630</td>
+      <td>90000.0</td>
+      <td>97557.126628</td>
     </tr>
     <tr>
       <th>219</th>
-      <td>159490.159748</td>
-      <td>149480.735204</td>
-      <td>153101.449623</td>
-      <td>143000.0</td>
-      <td>158765.405496</td>
+      <td>103542.700735</td>
+      <td>93859.897549</td>
+      <td>91911.625344</td>
+      <td>110000.0</td>
+      <td>102474.350684</td>
     </tr>
     <tr>
       <th>220</th>
-      <td>142634.502894</td>
-      <td>138275.736590</td>
-      <td>145636.520234</td>
-      <td>124500.0</td>
-      <td>137126.544155</td>
+      <td>260049.172323</td>
+      <td>257365.745860</td>
+      <td>258088.894459</td>
+      <td>274300.0</td>
+      <td>250911.539196</td>
     </tr>
     <tr>
       <th>221</th>
-      <td>218561.191815</td>
-      <td>227630.082598</td>
-      <td>228343.099068</td>
-      <td>239000.0</td>
-      <td>213406.268062</td>
+      <td>343860.091861</td>
+      <td>339452.441697</td>
+      <td>339653.756971</td>
+      <td>325000.0</td>
+      <td>328010.805663</td>
     </tr>
     <tr>
       <th>222</th>
-      <td>214733.704463</td>
-      <td>205315.116111</td>
-      <td>208002.947288</td>
-      <td>207000.0</td>
-      <td>212146.708261</td>
+      <td>229635.875850</td>
+      <td>230116.111868</td>
+      <td>229217.552108</td>
+      <td>224000.0</td>
+      <td>223237.377406</td>
     </tr>
     <tr>
       <th>223</th>
-      <td>173803.063752</td>
-      <td>165882.867264</td>
-      <td>167823.974058</td>
-      <td>177000.0</td>
-      <td>173736.147019</td>
+      <td>448830.453255</td>
+      <td>449823.935079</td>
+      <td>450804.081890</td>
+      <td>437154.0</td>
+      <td>427502.800253</td>
     </tr>
     <tr>
       <th>224</th>
-      <td>117846.794178</td>
-      <td>120257.940387</td>
-      <td>119114.432798</td>
+      <td>113562.706459</td>
+      <td>120814.187595</td>
+      <td>118747.490573</td>
       <td>130000.0</td>
-      <td>121490.877868</td>
+      <td>117350.391727</td>
     </tr>
     <tr>
       <th>225</th>
-      <td>101011.986109</td>
-      <td>99255.449779</td>
-      <td>100082.448061</td>
-      <td>86000.0</td>
-      <td>104313.998383</td>
+      <td>345097.442534</td>
+      <td>375809.076470</td>
+      <td>374012.120551</td>
+      <td>377426.0</td>
+      <td>340195.316555</td>
     </tr>
     <tr>
       <th>226</th>
-      <td>219780.236707</td>
-      <td>217422.477638</td>
-      <td>217714.763716</td>
-      <td>212000.0</td>
-      <td>217884.955450</td>
+      <td>188059.456481</td>
+      <td>181660.718445</td>
+      <td>184329.507189</td>
+      <td>185000.0</td>
+      <td>183410.100422</td>
     </tr>
     <tr>
       <th>227</th>
-      <td>129467.723046</td>
-      <td>137237.277244</td>
-      <td>138351.297683</td>
-      <td>133900.0</td>
-      <td>128647.593861</td>
+      <td>132883.914049</td>
+      <td>130677.576713</td>
+      <td>130235.157691</td>
+      <td>127000.0</td>
+      <td>132641.527991</td>
     </tr>
     <tr>
       <th>228</th>
-      <td>175383.279785</td>
-      <td>167512.068082</td>
-      <td>170596.097293</td>
-      <td>124900.0</td>
-      <td>173935.311901</td>
+      <td>93342.472515</td>
+      <td>80665.133122</td>
+      <td>83464.351364</td>
+      <td>101800.0</td>
+      <td>93418.070094</td>
     </tr>
     <tr>
       <th>229</th>
-      <td>206003.629144</td>
-      <td>207930.213770</td>
-      <td>204822.112927</td>
-      <td>193500.0</td>
-      <td>207568.512154</td>
+      <td>175193.791249</td>
+      <td>271493.128719</td>
+      <td>262807.366536</td>
+      <td>168500.0</td>
+      <td>202101.035253</td>
     </tr>
     <tr>
       <th>230</th>
-      <td>179914.599409</td>
-      <td>165133.007080</td>
-      <td>170761.493133</td>
-      <td>167000.0</td>
-      <td>177089.552396</td>
+      <td>73545.383335</td>
+      <td>72405.070320</td>
+      <td>71414.363227</td>
+      <td>96500.0</td>
+      <td>77731.683161</td>
     </tr>
     <tr>
       <th>231</th>
-      <td>168708.362785</td>
-      <td>176504.637100</td>
-      <td>174281.492457</td>
-      <td>170000.0</td>
-      <td>169681.259917</td>
+      <td>108006.470029</td>
+      <td>108513.463715</td>
+      <td>109319.120414</td>
+      <td>118000.0</td>
+      <td>110809.153924</td>
     </tr>
     <tr>
       <th>232</th>
-      <td>138862.050314</td>
-      <td>145291.012429</td>
-      <td>143592.334228</td>
-      <td>128500.0</td>
-      <td>141079.014432</td>
+      <td>26226.439086</td>
+      <td>37148.236575</td>
+      <td>35599.464025</td>
+      <td>60000.0</td>
+      <td>37620.749766</td>
     </tr>
     <tr>
       <th>233</th>
-      <td>387911.487603</td>
-      <td>363418.040037</td>
-      <td>368926.896625</td>
-      <td>423000.0</td>
-      <td>377219.448310</td>
+      <td>148442.498373</td>
+      <td>141588.345627</td>
+      <td>141900.045288</td>
+      <td>159500.0</td>
+      <td>145773.473243</td>
     </tr>
     <tr>
       <th>234</th>
-      <td>121431.524106</td>
-      <td>124411.621312</td>
-      <td>123615.690609</td>
-      <td>126500.0</td>
-      <td>124362.096397</td>
+      <td>97511.396927</td>
+      <td>85983.503139</td>
+      <td>93819.421863</td>
+      <td>116000.0</td>
+      <td>99162.377783</td>
     </tr>
     <tr>
       <th>235</th>
-      <td>159027.847218</td>
-      <td>166829.832723</td>
-      <td>164546.280692</td>
-      <td>149000.0</td>
-      <td>160552.489511</td>
+      <td>189657.465280</td>
+      <td>183855.740930</td>
+      <td>185141.206182</td>
+      <td>194000.0</td>
+      <td>184681.705276</td>
     </tr>
     <tr>
       <th>236</th>
-      <td>210559.669391</td>
-      <td>248324.247796</td>
-      <td>238138.154323</td>
-      <td>215200.0</td>
-      <td>210957.197106</td>
+      <td>215678.980180</td>
+      <td>212762.761755</td>
+      <td>213993.895854</td>
+      <td>210000.0</td>
+      <td>209783.918098</td>
     </tr>
   </tbody>
 </table>
@@ -14924,86 +14842,47 @@ Accuracy: 0.87753 (+/- 0.04)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[283]:</div>
+<div class="prompt input_prompt">In&nbsp;[369]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sub_dataframe</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/test_dummied.csv&quot;</span><span class="p">)</span>
 <span class="n">sub_dataframe</span><span class="o">=</span><span class="n">sub_dataframe</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">sub_dataframe</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span>
+
 <span class="n">X_sub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sub_dataframe</span><span class="p">)</span>
+<span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_sub</span><span class="p">)</span>
 
 <span class="n">submission_dataset</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;lasso&#39;</span><span class="p">:</span><span class="n">lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_sub</span><span class="p">),</span>
                                 <span class="s1">&#39;ridge&#39;</span><span class="p">:</span><span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_sub</span><span class="p">),</span>
                                 <span class="s1">&#39;ENST&#39;</span><span class="p">:</span><span class="n">ENST</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_sub</span><span class="p">)})</span>
+
+<span class="n">predictions</span><span class="o">=</span><span class="n">stacker</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">submission_dataset</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-283-93df73d41fad&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> X_sub<span class="ansi-blue-fg">=</span>np<span class="ansi-blue-fg">.</span>array<span class="ansi-blue-fg">(</span>sub_dataframe<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> 
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span>lasso<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>X_sub<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-red-fg">#submission_dataset=pd.DataFrame({&#39;lasso&#39;:lasso.predict(X_sub),</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-red-fg">#                                &#39;ridge&#39;:ridge.predict(X_sub),</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/sklearn/linear_model/base.py</span> in <span class="ansi-cyan-fg">predict</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-intense-fg ansi-bold">    266</span>             Returns predicted values<span class="ansi-blue-fg">.</span>
-<span class="ansi-green-intense-fg ansi-bold">    267</span>         &#34;&#34;&#34;
-<span class="ansi-green-fg">--&gt; 268</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_decision_function<span class="ansi-blue-fg">(</span>X<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    269</span> 
-<span class="ansi-green-intense-fg ansi-bold">    270</span>     _preprocess_data <span class="ansi-blue-fg">=</span> staticmethod<span class="ansi-blue-fg">(</span>_preprocess_data<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/sklearn/linear_model/coordinate_descent.py</span> in <span class="ansi-cyan-fg">_decision_function</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-intense-fg ansi-bold">    779</span>                                    dense_output=True) + self.intercept_
-<span class="ansi-green-intense-fg ansi-bold">    780</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 781</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> super<span class="ansi-blue-fg">(</span>ElasticNet<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>_decision_function<span class="ansi-blue-fg">(</span>X<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    782</span> 
-<span class="ansi-green-intense-fg ansi-bold">    783</span> 
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/sklearn/linear_model/base.py</span> in <span class="ansi-cyan-fg">_decision_function</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-intense-fg ansi-bold">    249</span>         check_is_fitted<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;coef_&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    250</span> 
-<span class="ansi-green-fg">--&gt; 251</span><span class="ansi-red-fg">         </span>X <span class="ansi-blue-fg">=</span> check_array<span class="ansi-blue-fg">(</span>X<span class="ansi-blue-fg">,</span> accept_sparse<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;csr&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;csc&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;coo&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    252</span>         return safe_sparse_dot(X, self.coef_.T,
-<span class="ansi-green-intense-fg ansi-bold">    253</span>                                dense_output=True) + self.intercept_
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/sklearn/utils/validation.py</span> in <span class="ansi-cyan-fg">check_array</span><span class="ansi-blue-fg">(array, accept_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, warn_on_dtype, estimator)</span>
-<span class="ansi-green-intense-fg ansi-bold">    405</span>                              % (array.ndim, estimator_name))
-<span class="ansi-green-intense-fg ansi-bold">    406</span>         <span class="ansi-green-fg">if</span> force_all_finite<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 407</span><span class="ansi-red-fg">             </span>_assert_all_finite<span class="ansi-blue-fg">(</span>array<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    408</span> 
-<span class="ansi-green-intense-fg ansi-bold">    409</span>     shape_repr <span class="ansi-blue-fg">=</span> _shape_repr<span class="ansi-blue-fg">(</span>array<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/sklearn/utils/validation.py</span> in <span class="ansi-cyan-fg">_assert_all_finite</span><span class="ansi-blue-fg">(X)</span>
-<span class="ansi-green-intense-fg ansi-bold">     56</span>             and not np.isfinite(X).all()):
-<span class="ansi-green-intense-fg ansi-bold">     57</span>         raise ValueError(&#34;Input contains NaN, infinity&#34;
-<span class="ansi-green-fg">---&gt; 58</span><span class="ansi-red-fg">                          &#34; or a value too large for %r.&#34; % X.dtype)
-</span><span class="ansi-green-intense-fg ansi-bold">     59</span> 
-<span class="ansi-green-intense-fg ansi-bold">     60</span> 
-
-<span class="ansi-red-fg">ValueError</span>: Input contains NaN, infinity or a value too large for dtype(&#39;float64&#39;).</pre>
 </div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[374]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pred_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">:</span><span class="n">predictions</span><span class="p">,</span>
+                      <span class="s1">&#39;Id&#39;</span><span class="p">:</span><span class="n">sub_dataframe</span><span class="o">.</span><span class="n">index</span><span class="p">})</span>
+<span class="n">pred_df</span><span class="o">=</span><span class="n">pred_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span>
+<span class="n">pred_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/submission.csv&#39;</span><span class="p">)</span>
+</pre></div>
 
+</div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[282]:</div>
+<div class="prompt input_prompt">In&nbsp;[376]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sub_dataframe</span>
@@ -15018,7 +14897,7 @@ Accuracy: 0.87753 (+/- 0.04)
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[282]:</div>
+<div class="prompt output_prompt">Out[376]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -16541,7 +16420,7 @@ Accuracy: 0.87753 (+/- 0.04)
     </tr>
   </tbody>
 </table>
-<p>1210 rows × 298 columns</p>
+<p>1210 rows × 309 columns</p>
 </div>
 </div>
 
