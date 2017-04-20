@@ -5,7 +5,7 @@
 # ### Outputs:
 # - Data Exploration Report
 
-# In[2]:
+# In[127]:
 
 import nltk
 import pandas as pd
@@ -19,14 +19,16 @@ from sklearn import datasets, linear_model
 import numpy as np
 from numbers import Number
 
+import seaborn as sns
 
-# In[3]:
+
+# In[133]:
 
 train= pd.read_csv("../data/train.csv")
-train.set_index('Id')
+train=train.set_index('Id')
 
 
-# In[4]:
+# In[134]:
 
 def hist_boxplot(column,figsize=(13,8)):
     fig = plt.figure(figsize=figsize) 
@@ -51,405 +53,414 @@ def value_counts_and_info(column,figsize=(13,4)):
     print ('Null Values:',column.isnull().sum())
 
 
-# In[5]:
+# In[135]:
 
 value_counts_and_info(train['MSSubClass'])
 
 
-# In[6]:
+# In[131]:
 
 value_counts_and_info(train['MSZoning'])
 
 
-# In[7]:
+# In[136]:
 
 #train['LotFrontage'].hist()
 hist_boxplot(train['LotFrontage'])
 
 
-# In[8]:
+# In[137]:
 
 hist_boxplot(train['LotArea'])
 
 
-# In[9]:
+# In[138]:
 
 value_counts_and_info(train['Street'])
 
 
-# In[10]:
+# In[ ]:
 
 ## Se identificaron los valores NaN indica que no hay camino de entrada.
 value_counts_and_info(train['Alley'])
 
 
-# In[11]:
+# In[ ]:
 
 value_counts_and_info(train['LotShape'])
 
 
-# In[12]:
+# In[ ]:
 
 value_counts_and_info(train['LandContour'])
 
 
-# In[13]:
+# In[ ]:
 
 #value_counts_and_info(train['Utilities'])
 
 
-# In[14]:
+# In[ ]:
 
 value_counts_and_info(train['LotConfig'])
 
 
-# In[15]:
+# In[ ]:
 
 value_counts_and_info(train['LandSlope'])
 
 
-# In[16]:
+# In[ ]:
 
 value_counts_and_info(train['Neighborhood'])
 
 
-# In[17]:
+# In[ ]:
 
 value_counts_and_info(train['Condition1'])
 
 
-# In[18]:
+# In[ ]:
 
 value_counts_and_info(train['Condition2'])
 
 
-# In[19]:
+# In[ ]:
 
 value_counts_and_info(train['BldgType'])
 
 
-# In[20]:
+# In[ ]:
 
 value_counts_and_info(train['HouseStyle'])
 
 
-# In[21]:
+# In[ ]:
 
 value_counts_and_info(train['OverallQual'])
 
 
-# In[22]:
+# In[ ]:
 
 value_counts_and_info(train['OverallCond'])
 
 
-# In[23]:
+# In[ ]:
 
 hist_and_info(train['YearBuilt'])
 
 
-# In[24]:
+# In[ ]:
 
 hist_and_info(train['YearRemodAdd'])
 
 
-# In[25]:
+# In[ ]:
 
 value_counts_and_info(train['RoofStyle'])
 
 
-# In[26]:
+# In[ ]:
 
 value_counts_and_info(train['RoofMatl'])
 
 
-# In[27]:
+# In[ ]:
 
 value_counts_and_info(train['Exterior1st'])
 
 
-# In[28]:
+# In[ ]:
 
 value_counts_and_info(train['Exterior2nd'])
 
 
-# In[29]:
+# In[ ]:
 
 value_counts_and_info(train['MasVnrType'])
 
 
-# In[30]:
+# In[ ]:
 
 hist_boxplot(train['MasVnrArea'])
 
 
-# In[31]:
+# In[ ]:
 
 value_counts_and_info(train['ExterQual'])
 
 
-# In[32]:
+# In[ ]:
 
 value_counts_and_info(train['ExterCond'])
 
 
-# In[33]:
+# In[ ]:
 
 value_counts_and_info(train['Foundation'])
 
 
-# In[34]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtQual'])
 
 
-# In[35]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtCond'])
 
 
-# In[36]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtExposure'])
 
 
-# In[37]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtFinType1'])
 
 
-# In[38]:
+# In[ ]:
 
 hist_boxplot(train['BsmtFinSF1'])
 
 
-# In[39]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtFinType2'])
 
 
-# In[40]:
+# In[ ]:
 
 hist_boxplot(train['BsmtFinSF2'])
 
 
-# In[41]:
+# In[ ]:
 
 hist_and_info(train['BsmtUnfSF'])
 
 
-# In[42]:
+# In[ ]:
 
 hist_boxplot(train['TotalBsmtSF'])
 
 
-# In[43]:
+# In[ ]:
 
 value_counts_and_info(train['Heating'])
 
 
-# In[44]:
+# In[ ]:
 
 value_counts_and_info(train['HeatingQC'])
 
 
-# In[45]:
+# In[ ]:
 
 value_counts_and_info(train['CentralAir'])
 
 
-# In[46]:
+# In[ ]:
 
 value_counts_and_info(train['Electrical'])
 
 
-# In[47]:
+# In[ ]:
 
 hist_boxplot(train['1stFlrSF'])
 
 
-# In[48]:
+# In[ ]:
 
 hist_boxplot(train['2ndFlrSF'])
 
 
-# In[49]:
+# In[ ]:
 
 hist_boxplot(train['LowQualFinSF'])
 
 
-# In[50]:
+# In[ ]:
 
 hist_boxplot(train['GrLivArea'])
 
 
-# In[51]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtFullBath'])
 
 
-# In[52]:
+# In[ ]:
 
 value_counts_and_info(train['BsmtHalfBath'])
 
 
-# In[53]:
+# In[ ]:
 
 value_counts_and_info(train['FullBath'])
 
 
-# In[54]:
+# In[ ]:
 
 value_counts_and_info(train['HalfBath'])
 
 
-# In[55]:
+# In[ ]:
 
 value_counts_and_info(train['BedroomAbvGr'])
 
 
-# In[56]:
+# In[ ]:
 
 value_counts_and_info(train['KitchenAbvGr'])
 
 
-# In[57]:
+# In[ ]:
 
 value_counts_and_info(train['KitchenQual'])
 
 
-# In[58]:
+# In[ ]:
 
 value_counts_and_info(train['TotRmsAbvGrd'])
 
 
-# In[59]:
+# In[ ]:
 
 value_counts_and_info(train['Functional'])
 
 
-# In[60]:
+# In[ ]:
 
 value_counts_and_info(train['Fireplaces'])
 
 
-# In[61]:
+# In[ ]:
 
 value_counts_and_info(train['FireplaceQu'])
 
 
-# In[62]:
+# In[ ]:
 
 value_counts_and_info(train['GarageType'])
 
 
-# In[63]:
+# In[ ]:
 
 hist_and_info(train['GarageYrBlt'])
 
 
-# In[64]:
+# In[ ]:
 
 value_counts_and_info(train['GarageFinish'])
 
 
-# In[65]:
+# In[ ]:
 
 value_counts_and_info(train['GarageCars'])
 
 
-# In[66]:
+# In[ ]:
 
 hist_boxplot(train['GarageArea'])
 
 
-# In[67]:
+# In[ ]:
 
 value_counts_and_info(train['GarageQual'])
 
 
-# In[68]:
+# In[ ]:
 
 value_counts_and_info(train['GarageCond'])
 
 
-# In[69]:
+# In[ ]:
 
 value_counts_and_info(train['PavedDrive'])
 
 
-# In[70]:
+# In[ ]:
 
 hist_boxplot(train['WoodDeckSF'])
 
 
-# In[71]:
+# In[ ]:
 
 hist_boxplot(train['OpenPorchSF'])
 
 
-# In[72]:
+# In[ ]:
 
 hist_boxplot(train['EnclosedPorch'])
 
 
-# In[73]:
+# In[ ]:
 
 hist_boxplot(train['3SsnPorch'])
 
 
-# In[74]:
+# In[ ]:
 
 hist_and_info(train['ScreenPorch'])
 
 
-# In[75]:
+# In[ ]:
 
 hist_and_info(train['PoolArea'])
 
 
-# In[76]:
+# In[ ]:
 
 value_counts_and_info(train['PoolQC'])
 
 
-# In[77]:
+# In[ ]:
 
 value_counts_and_info(train['Fence'])
 
 
-# In[78]:
+# In[ ]:
 
 value_counts_and_info(train['MiscFeature'])
 
 
-# In[79]:
+# In[ ]:
 
 value_counts_and_info(train['MiscVal'])
 
 
-# In[80]:
+# In[ ]:
 
 value_counts_and_info(train['MoSold'])
 
 
-# In[81]:
+# In[ ]:
 
 value_counts_and_info(train['YrSold'])
 
 
-# In[82]:
+# In[ ]:
 
 value_counts_and_info(train['SaleType'])
 
 
-# In[83]:
+# In[ ]:
 
 value_counts_and_info(train['SaleCondition'])
 
 
-# 
-# 
+# In[139]:
+
+corrmat = train.iloc[:,:-1].corr()
+f, ax = plt.subplots(figsize=(12, 9))
+sns.heatmap(corrmat, vmax=.8, square=True);
+
+
+# In[ ]:
+
+
+
 
 # ## 2.4 Verify Data Quality
 # ### Outputs:

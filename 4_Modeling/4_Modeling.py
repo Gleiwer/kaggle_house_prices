@@ -9,7 +9,7 @@
 # 
 # 
 
-# In[320]:
+# In[433]:
 
 from sklearn.linear_model import LogisticRegression
 import nltk
@@ -34,7 +34,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[321]:
+# In[434]:
 
 train_dataframe= pd.read_csv("../data/train_dummied.csv")
 train_dataframe=train_dataframe.set_index('Id')
@@ -51,14 +51,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
 
 # ### Logistic Regression
 
-# In[322]:
+# In[435]:
 
 lr = LogisticRegression(C=1000.0, random_state=0)
 lr.fit(X_train, y_train)
 y_pred_lr=lr.predict(X_test)
 
 
-# In[323]:
+# In[436]:
 
 print ('Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_pred_lr,y_test)))
 scores = cross_val_score(clf, X_train, y_train, cv=5)
@@ -67,14 +67,14 @@ print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 # ###  Decision Tree Regression 
 
-# In[324]:
+# In[437]:
 
 clf = tree.DecisionTreeRegressor()
 clf = clf.fit(X_train, y_train)
 y_pred_clf=clf.predict(X_test)
 
 
-# In[325]:
+# In[438]:
 
 print ('Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_pred_clf,y_test)))
 scores = cross_val_score(clf, X_train, y_train, cv=5)
@@ -83,14 +83,14 @@ print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 # ## Ridge Linear Regression
 
-# In[326]:
+# In[439]:
 
 ridge = linear_model.Ridge (alpha = .5)
 ridge.fit (X_train,y_train)
 y_pred_ridge = ridge.predict(X_test)
 
 
-# In[327]:
+# In[440]:
 
 print ('Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_pred_ridge,y_test)))
 scores = cross_val_score(ridge, X_train, y_train, cv=5)
@@ -99,14 +99,14 @@ print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 # ## Lasso Linear Regression
 
-# In[328]:
+# In[441]:
 
 lasso = linear_model.Lasso(alpha = 1.5)
 lasso = lasso.fit(X_train,y_train)
 y_pred_lasso = lasso.predict(X_test)
 
 
-# In[329]:
+# In[442]:
 
 print ('Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_pred_lasso,y_test)))
 scores = cross_val_score(lasso, X_train, y_train, cv=5)
@@ -115,7 +115,7 @@ print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 # ## Elastic Net
 
-# In[330]:
+# In[443]:
 
 ENST = linear_model.ElasticNetCV(alphas=[0.0001, 0.0005, 0.001, 0.01, 0.1, 1, 10], 
                                     l1_ratio=[.01, .1, .5, .9, .99], 
@@ -124,7 +124,7 @@ ENST = ENST.fit(X_train, y_train)
 y_pred_enst = ENST.predict(X_test)
 
 
-# In[331]:
+# In[444]:
 
 print ('Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_pred_enst,y_test)))
 scores = cross_val_score(ENST, X_train, y_train, cv=5)
@@ -133,7 +133,7 @@ print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 # ## Gradient Tree Boosting
 
-# In[332]:
+# In[445]:
 
 gtb = GradientBoostingRegressor(n_estimators=100, 
                                 learning_rate=0.1,
@@ -144,7 +144,7 @@ gtb = gtb.fit(X_train,y_train)
 y_pred_gtb = gtb.predict(X_test)
 
 
-# In[333]:
+# In[446]:
 
 print ('Mean Squared Error:',np.sqrt(metrics.mean_squared_error(y_pred_gtb,y_test)))
 scores = cross_val_score(gtb, X_train, y_train, cv=5)
@@ -153,7 +153,7 @@ print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 # ## Voting Classifier
 
-# In[334]:
+# In[467]:
 
 results=pd.DataFrame({'Ridge':y_pred_ridge,
                      'Lasso':y_pred_lasso,
@@ -161,32 +161,30 @@ results=pd.DataFrame({'Ridge':y_pred_ridge,
                      'test':y_test})
 
 
-# In[335]:
+# In[470]:
 
 stacker= linear_model.LinearRegression()
 stacker.fit(results[['Ridge', 'Lasso', 'ENST']], results['test'])
 
 
-# In[336]:
+# In[471]:
 
 scores = cross_val_score(stacker, results[['Ridge', 'Lasso', 'ENST']], results['test'], cv=5)
 print("Accuracy: %0.5f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 
-# In[337]:
+# In[461]:
 
 results['stacked']=stacker.predict(results[['Ridge', 'Lasso', 'ENST']])
-results
 
 
-# In[369]:
+# In[458]:
 
 sub_dataframe= pd.read_csv("../data/test_dummied.csv")
 sub_dataframe=sub_dataframe.set_index('Id')
 del sub_dataframe['SalePrice']
 
 X_sub=np.array(sub_dataframe)
-ridge.predict(X_sub)
 
 submission_dataset=pd.DataFrame({'lasso':lasso.predict(X_sub),
                                 'ridge':ridge.predict(X_sub),
@@ -195,7 +193,7 @@ submission_dataset=pd.DataFrame({'lasso':lasso.predict(X_sub),
 predictions=stacker.predict(submission_dataset)
 
 
-# In[374]:
+# In[459]:
 
 pred_df=pd.DataFrame({'SalePrice':predictions,
                       'Id':sub_dataframe.index})
@@ -203,9 +201,12 @@ pred_df=pred_df.set_index('Id')
 pred_df.to_csv('../data/submission.csv')
 
 
-# In[376]:
+# In[474]:
 
-sub_dataframe
+enst_pred=pd.DataFrame({'SalePrice':ENST.predict(X_sub),
+           'Id':sub_dataframe.index})
+enst_pred=enst_pred.set_index('Id')
+enst_pred.to_csv('../data/submission_enst.csv')
 
 
 # ## 4.2 Generate Test Design

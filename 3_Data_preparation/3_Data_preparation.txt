@@ -28,53 +28,58 @@ def correlation_matrix(df,figsize=(15,15)):
 
 train= pd.read_csv("../data/train.csv")
 test=pd.read_csv('../data/test.csv')
+
+
+
+train=train[train['LotArea']<55000]
+train=train[train['LotFrontage']<300]
+train=train[train['MasVnrArea']<1200]
+train=train[train['MasVnrArea']<1200]
+train=train[train['BsmtFinSF1']<5000]
+train=train[train['BsmtFinSF2']<1400]
+train=train[train['TotalBsmtSF']<3500]
+train['Electrical'].dropna(inplace=True)
+train=train[train['1stFlrSF']!=0]
+train=train[train['1stFlrSF']<4000]
+train=train[train['GrLivArea']!=0]
+train=train[train['WoodDeckSF']<750]
+train=train[train['OpenPorchSF']<400]
+train=train[train['EnclosedPorch']<400]
+
+
 dataset=pd.concat([train,test],keys=['train','test'])
 
 del dataset['Utilities']
+del dataset['TotalBsmtSF']
+del dataset['TotRmsAbvGrd']
+del dataset['GarageYrBlt']
+del dataset['GarageCars']
 
 
-
-dataset=dataset[dataset['LotArea']<55000]
-dataset=dataset[dataset['LotFrontage']<300]
 dataset['LotFrontage'].fillna(dataset['LotFrontage'].mean(),inplace=True)
-dataset=dataset[dataset['MasVnrArea']<1200]
 dataset['Alley'].fillna('XX',inplace=True)
-dataset=dataset[dataset['MasVnrArea']<1200]
 dataset['MasVnrArea'].fillna(dataset['MasVnrArea'].mean(),inplace=True)
 dataset['BsmtQual'].fillna('XX',inplace=True)
 dataset['BsmtCond'].fillna('XX',inplace=True)
 dataset['BsmtExposure'].fillna('XX',inplace=True)
+dataset['BsmtFinSF1'].fillna(0,inplace=True)
+dataset['BsmtFinSF2'].fillna(0,inplace=True)
+dataset['BsmtUnfSF'].fillna(0,inplace=True)
 dataset['BsmtFinType1'].fillna('XX',inplace=True)
 dataset['BsmtFinType2'].fillna('XX',inplace=True)
-dataset=dataset[dataset['BsmtFinSF1']<5000]
-dataset=dataset[dataset['BsmtFinSF2']<1400]
-dataset=dataset[dataset['TotalBsmtSF']<3500]
+
 dataset['BsmtFullBath'].fillna(dataset['BsmtFullBath'].mean(),inplace=True)
 dataset['BsmtHalfBath'].fillna(dataset['BsmtHalfBath'].mean(),inplace=True)
-dataset['Electrical'].dropna(inplace=True)
-dataset=dataset[dataset['1stFlrSF']!=0]
-dataset=dataset[dataset['1stFlrSF']<4000]
-dataset=dataset[dataset['GrLivArea']!=0]
 dataset['MiscFeature'].fillna('XX',inplace=True)
 dataset['MiscVal'].fillna(0,inplace=True)
 dataset['FireplaceQu'].fillna('XX',inplace=True)
 dataset['GarageType'].fillna('XX',inplace=True)
-dataset['GarageYrBlt'].fillna(0,inplace=True)
 dataset['GarageFinish'].fillna('XX',inplace=True)
 dataset['GarageQual'].fillna('XX',inplace=True)
 dataset['GarageCond'].fillna('XX',inplace=True)
-dataset['GarageCars'].fillna(0,inplace=True)
 dataset['GarageArea'].fillna(0,inplace=True)
-
-dataset=dataset[dataset['WoodDeckSF']<750]
-dataset=dataset[dataset['OpenPorchSF']<400]
-dataset=dataset[dataset['EnclosedPorch']<400]
 dataset['PoolQC'].fillna('XX',inplace=True)
 dataset['Fence'].fillna('XX',inplace=True)
-
-
-
-
 
 dataset.loc['train'].to_csv('../data/train_cleaned.csv')
 dataset.loc['test'].to_csv('../data/test_cleaned.csv')
@@ -93,7 +98,6 @@ Numeric_columns=['LotFrontage',
                 'BsmtFinSF1',
                 'BsmtFinSF2',
                 'BsmtUnfSF',
-                'TotalBsmtSF',
                 '1stFlrSF',
                 '2ndFlrSF',
                 'LowQualFinSF',
@@ -104,10 +108,7 @@ Numeric_columns=['LotFrontage',
                 'HalfBath',
                 'BedroomAbvGr',
                 'KitchenAbvGr',
-                'TotRmsAbvGrd',
                 'Fireplaces',
-                'GarageYrBlt',
-                'GarageCars',
                 'GarageArea',
                 'WoodDeckSF',
                 'OpenPorchSF',
@@ -117,10 +118,8 @@ Numeric_columns=['LotFrontage',
                 'PoolArea',
                 'MiscVal',
                 'MoSold',
-                'YrSold',
-                'TotalBsmtSF']
+                'YrSold']
 for i in Numeric_columns:
-    #pdb.set_trace()
     dataset[i]=preprocessing.scale(dataset[i])
     
 dataset=pd.get_dummies(dataset)
@@ -137,4 +136,4 @@ test_dummied.to_csv('../data/test_dummied.csv')
 
 
 
-test_dummied
+
